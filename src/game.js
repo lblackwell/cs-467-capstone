@@ -1,31 +1,56 @@
 var screenWidth = 800;
 var screenHeight = 600;
 
-Game = {
-	start: function() {
+Game =
+{
+	start: function()
+	{
 		Crafty.init(800,600, document.getElementById('game'));
 
 		Crafty.background('#e0fbfd')
 
-		Crafty.defineScene('HomeScreen', function() {
+		// Start screen scene
+		Crafty.defineScene('HomeScreen', function()
+		{
 			Crafty.e('2D, DOM, Text')
-				.attr({x: 0, y: 300, w: 800, h: 600})
+				.attr({x: 0, y: 300,
+					   w: screenWidth, h: screenHeight})
 				.text('Press Enter to begin')
-				.textFont({ family: 'Trebuchet MS',
-							size: '30px',
-							weight: 'bold'})
+				.textFont({family: 'Trebuchet MS',
+						   size: '30px',
+						   weight: 'bold'})
 				.textColor('#373854')
 				.textAlign('center');
 			Crafty.e('Start, 2D, Canvas, Color, Solid')
 				.attr({x: 200, y: 200, w: 100, h: 40})
-				.bind('KeyDown', function(e) {
-					if(e.key == Crafty.keys.ENTER) {
+				.bind('KeyDown', function(e)
+				{
+					if(e.key == Crafty.keys.ENTER)
+					{
 						Crafty.enterScene('World');
 					}
 				});
 		});
 
-		Crafty.defineScene('World', function() {
+		// Player setup screen scene
+		Crafty.defineScene('SetupScreen', function()
+		{
+			// Enter username
+			Crafty.e('2D, DOM, Text')
+				.attr({x: 20, y: 20, w: 800, h: 100})
+				.text('Username: ')
+				.textFont({family: 'Trebuchet MS',
+						   size: '20px'})
+				.textColor('#373854');
+
+			// Select avatar
+
+			// Ready/enter world button
+		});
+
+		// Main game world scene
+		Crafty.defineScene('World', function()
+		{
 			// Player sprite
 	        var player = Crafty.e('2D, DOM, Color, Twoway, Gravity')
 	        	// Initial position and size
@@ -41,13 +66,18 @@ Game = {
 	      		.jumper(300, [Crafty.keys.SPACE])
 	      		// Allow player to drop through platforms
 	      		// TODO: investigate why this only works once
-	      		.bind('KeyDown', function(e) {
-	      			if(e.key == Crafty.keys.DOWN_ARROW) {
-	      				this.gravity = this.gravity('');
+	      		.bind('KeyDown', function(e)
+	      		{
+	      			if(e.key == Crafty.keys.DOWN_ARROW)
+	      			{
+	      				this.antigravity();
+	      				this.gravity('Platform');
 	      			}})
-	      		.bind('KeyUp', function(e) {
-	      			if(e.key == Crafty.keys.DOWN_ARROW) {
-	      				this.gravity = this.gravity('Platform');
+	      		.bind('KeyUp', function(e)
+	      		{
+	      			if(e.key == Crafty.keys.DOWN_ARROW)
+	      			{
+	      				this.gravity('Platform');
 	      			}});
 
 	      	// Platforms
@@ -67,7 +97,8 @@ Game = {
 	      		.attr({x: 170, y: 540, w: 100, h: 10})
 	      		.color('green');
 
-	      	Crafty.e('Platform, 2D, Canvas, Color')  // Floor
+	      	// Floor
+	      	Crafty.e('Platform, 2D, Canvas, Color')
 	      		.attr({x: -4000, y: 590, w: 8000, h: 10})
 	      		.color('green');
 
