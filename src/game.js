@@ -27,7 +27,7 @@ Game =
 				{
 					if(e.key == Crafty.keys.ENTER)
 					{
-						Crafty.enterScene('World');
+						Crafty.enterScene('SetupScreen');
 					}
 				});
 		});
@@ -46,6 +46,18 @@ Game =
 			// Select avatar
 
 			// Ready/enter world button
+			Crafty.e('2D, DOM, Color, Mouse, Text',)
+				.attr({x: screenWidth / 2, y: 500,
+					   w: 200, h: 40})
+				.color('#FFFFFF')
+				.text('Start!')
+				.textAlign('center')
+				.textFont({family: 'Trebuchet MS',
+						   size: '20px'})
+				.bind('Click', function(MouseEvent)
+				{
+					Crafty.enterScene('World');
+				});
 		});
 
 		// Main game world scene
