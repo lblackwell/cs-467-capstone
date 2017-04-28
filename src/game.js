@@ -2,7 +2,7 @@ Game = {
 	start: function() {
 		Crafty.init(800,600, document.getElementById('game'));
 
-		Crafty.background('#DBDFEC')
+		Crafty.background('#e0fbfd')
 
 		Crafty.defineScene('HomeScreen', function() {
 			Crafty.e('2D, DOM, Text')
@@ -28,7 +28,7 @@ Game = {
 	      		.twoway(200)
 	      		// Set platforms to stop falling player
 	      		.gravity('Platform')
-	      		.gravityConst(700)
+	      		.gravityConst(650)
 	      		// Bind spacebar to jump action
 	      		.jumper(300, [Crafty.keys.SPACE])
 	      		// Allow player to drop through platforms
@@ -53,6 +53,10 @@ Game = {
 
 	      	Crafty.e('Platform, 2D, Canvas, Color')
 	      		.attr({x: 130, y: 450, w: 100, h: 10})
+	      		.color('green');
+
+	      	Crafty.e('Platform, 2D, Canvas, Color')
+	      		.attr({x: 170, y: 540, w: 100, h: 10})
 	      		.color('green');
 
 	      	Crafty.e('Platform, 2D, Canvas, Color')
