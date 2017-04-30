@@ -44,6 +44,7 @@ Game =
 				.textColor('#373854');
 
 			// Select avatar
+			// TODO
 
 			// Ready/enter world button
 			Crafty.e('2D, DOM, Color, Mouse, Text',)
@@ -119,6 +120,7 @@ Game =
 
       	});
 
+		// Start game on home screen
       	Crafty.enterScene('HomeScreen');
 	}
 }
