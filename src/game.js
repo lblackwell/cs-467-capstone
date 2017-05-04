@@ -1,5 +1,13 @@
-var screenWidth = 800;
-var screenHeight = 600;
+var tileWidth = 600;
+var tileHeight = 350;
+var canvasEdge = 50;
+var screenWidth = tileWidth + (2 * canvasEdge);
+var screenHeight = tileHeight + (2 * canvasEdge);
+var currentCenterX = 0;
+var currentCenterY = 0;
+var spriteWidth = 10;
+var spriteHeight = 50;
+var panTime = 500; // ms
 
 Game =
 {
@@ -67,7 +75,7 @@ Game =
 			// Player sprite
 	        var player = Crafty.e('2D, DOM, Color, Twoway, Gravity')
 	        	// Initial position and size
-	      		.attr({x: 0, y: 0, w: 10, h: 50})
+	      		.attr({x: 0, y: 0, w: spriteWidth, h: spriteHeight})
 	      		// Color of sprite (to be replaced)
 	      		.color('#F00')
 	      		// Enable 2D movement
@@ -90,7 +98,66 @@ Game =
 	      			if(e.key == Crafty.keys.DOWN_ARROW)
 	      			{
 	      				this.gravity('Platform');
-	      			}});
+	      			}})
+	      		// Move camera when player leaves current tile
+	      		.bind('Moved', function()
+	      			{
+	      				if (this.x > currentCenterX + (tileWidth / 2))
+	      				{
+	      					currentCenterX = currentCenterX + tileWidth;
+	      					Crafty.viewport.pan((tileWidth / 2) + canvasEdge, 0, panTime);
+	      				}
+	      				else if (this.x < currentCenterX - (tileWidth / 2))
+	      				{
+	      					currentCenterX = currentCenterX - tileWidth;
+      						Crafty.viewport.pan((tileWidth / 2) + canvasEdge, 0, panTime);
+	      				}
+
+	      				if (this.y > currentCenterY + (tileHeight / 2))
+	      				{
+	      					currentCenterY = currentCenterY + tileHeight;
+	      					Crafty.viewport.pan(0, (tileHeight / 2) + canvasEdge, panTime);
+	      				}
+	      				else if (this.y < currentCenterY - (tileHeight / 2))
+	      				{
+	      					currentCenterY = currentCenterY - tileHeight;
+	      					Crafty.viewport.pan(0, (tileHeight / 2) + canvasEdge, panTime);
+	      				}
+
+	      				// Debug
+	      				console.log('Center: ' + currentCenterX + ' ' + currentCenterY);
+	      				console.log('Player: ' + this.x + ' ' + this.y);
+	      				console.log('Viewport: ' + Crafty.viewport.x + ' ' + Crafty.viewport.y);
+	      			})
+				.bind('ViewportScroll', function()
+				{
+	      				if (this.x > currentCenterX + (tileWidth / 2))
+	      				{
+	      					currentCenterX = currentCenterX + tileWidth;
+	      					Crafty.viewport.pan((tileWidth / 2), 0, panTime);
+	      				}
+	      				else if (this.x < currentCenterX - (tileWidth / 2))
+	      				{
+	      					currentCenterX = currentCenterX - tileWidth;
+      						Crafty.viewport.pan((tileWidth / 2), 0, panTime);
+	      				}
+
+	      				if (this.y > currentCenterY + (tileHeight / 2))
+	      				{
+	      					currentCenterY = currentCenterY + tileHeight;
+	      					Crafty.viewport.pan(0, (tileHeight / 2), panTime);
+	      				}
+	      				else if (this.y < currentCenterY - (tileHeight / 2))
+	      				{
+	      					currentCenterY = currentCenterY - tileHeight;
+	      					Crafty.viewport.pan(0, (tileHeight / 2), panTime);
+	      				}
+
+	      				// Debug
+	      				console.log('Center: ' + currentCenterX + ' ' + currentCenterY);
+	      				console.log('Player: ' + this.x + ' ' + this.y);
+	      				console.log('Viewport: ' + Crafty.viewport.x + ' ' + Crafty.viewport.y);
+				});
 
 	      	// Platforms
 	      	Crafty.e('Platform, 2D, Canvas, Color')
@@ -113,13 +180,27 @@ Game =
 	      	Crafty.e('Platform, 2D, Canvas, Color')
 	      		.attr({x: -4000, y: 590, w: 8000, h: 10})
 	      		.color('green');
+	      	Crafty.e('Platform, 2D, Canvas, Color')
+	      		.attr({x: -4000, y: 1590, w: 8000, h: 10})
+	      		.color('green');
 
-	       	// Have camera follow player sprite
-	       	Crafty.viewport.follow(player, 0, 50);
-
+	      	// Debug
+	      	Crafty.e('Marker, 2D, Canvas, Color')
+	      		.attr({x: 0, y: 0, w: 10, h: 10})
+	      		.color('magenta')
+	      		.bind('ViewportScroll', function()
+	      			{
+	      				this.x = currentCenterX;
+	      				this.y = currentCenterY;
+	      			});
       	});
 
 		// Start game on home screen
       	Crafty.enterScene('HomeScreen');
+
+      	// Start camera on starting center point
+      	Crafty.viewport.clampToEntities = false;
+		Crafty.viewport.scroll('x', currentCenterX - (tileWidth / 2)+ canvasEdge);
+		Crafty.viewport.scroll('y', currentCenterY - (tileHeight / 2) + canvasEdge);
 	}
 }
