@@ -78,7 +78,6 @@ Game =
 	      		// Bind spacebar to jump action
 	      		.jumper(300, [Crafty.keys.SPACE])
 	      		// Allow player to drop through platforms
-	      		// TODO: investigate why this only works once
 	      		.bind('KeyDown', function(e)
 	      		{
 	      			if(e.key == Crafty.keys.DOWN_ARROW)
