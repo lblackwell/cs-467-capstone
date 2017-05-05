@@ -21,7 +21,8 @@ Game =
 		Crafty.defineScene('HomeScreen', function()
 		{
 			Crafty.e('2D, DOM, Text')
-				.attr({x: 0, y: 300,
+				.attr({x: currentCenterX + (tileWidth / 2),
+					   y: currentCenterY + tileHeight,
 					   w: screenWidth, h: screenHeight})
 				.text('Press Enter to begin')
 				.textFont({family: 'Trebuchet MS',
