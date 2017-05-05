@@ -7,6 +7,7 @@ var currentCenterX = 0;
 var currentCenterY = 0;
 var spriteWidth = 10;
 var spriteHeight = 50;
+var defaultTextColor = '#373854'
 
 Game =
 {
@@ -19,15 +20,29 @@ Game =
 		// Start screen scene
 		Crafty.defineScene('HomeScreen', function()
 		{
+			// Title
 			Crafty.e('2D, DOM, Text')
-				.attr({x: 0, y: screenHeight / 2,
+				.attr({x: 0, y: screenHeight / 3,
+					   w: screenWidth, h: screenHeight})
+				.text('&lt;TITLE&gt;')
+				.textFont({family: 'Trebuchet MS',
+						   size: '50px',
+						   weight: 'bold'})
+				.textColor(defaultTextColor)
+				.textAlign('center');
+
+			// Instructions
+			Crafty.e('2D, DOM, Text')
+				.attr({x: 0, y: (screenHeight / 3) * 2,
 					   w: screenWidth, h: screenHeight})
 				.text('Press Enter to begin')
 				.textFont({family: 'Trebuchet MS',
 						   size: '30px',
 						   weight: 'bold'})
-				.textColor('#373854')
+				.textColor(defaultTextColor)
 				.textAlign('center');
+
+			// Enter key loads avatar selection screen
 			Crafty.e('Start, 2D, Canvas, Color, Solid')
 				.attr({x: 200, y: 200, w: 100, h: 40})
 				.bind('KeyDown', function(e)
