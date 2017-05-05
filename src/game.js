@@ -1,11 +1,18 @@
-var screenWidth = 800;
-var screenHeight = 600;
+var tileWidth = 600;
+var tileHeight = 350;
+var canvasEdge = 50;
+var screenWidth = tileWidth + (2 * canvasEdge);
+var screenHeight = tileHeight + (2 * canvasEdge);
+var currentCenterX = 0;
+var currentCenterY = 0;
+var spriteWidth = 10;
+var spriteHeight = 50;
 
 Game =
 {
 	start: function()
 	{
-		Crafty.init(800,600, document.getElementById('game'));
+		Crafty.init(screenWidth, screenHeight, document.getElementById('game'));
 
 		Crafty.background('#e0fbfd')
 
@@ -13,7 +20,7 @@ Game =
 		Crafty.defineScene('HomeScreen', function()
 		{
 			Crafty.e('2D, DOM, Text')
-				.attr({x: 0, y: 300,
+				.attr({x: 0, y: screenHeight / 2,
 					   w: screenWidth, h: screenHeight})
 				.text('Press Enter to begin')
 				.textFont({family: 'Trebuchet MS',
@@ -35,20 +42,13 @@ Game =
 		// Player setup screen scene
 		Crafty.defineScene('SetupScreen', function()
 		{
-			// Enter username
-			Crafty.e('2D, DOM, Text')
-				.attr({x: 20, y: 20, w: 800, h: 100})
-				.text('Username: ')
-				.textFont({family: 'Trebuchet MS',
-						   size: '20px'})
-				.textColor('#373854');
-
 			// Select avatar
 			// TODO
 
 			// Ready/enter world button
 			Crafty.e('2D, DOM, Color, Mouse, Text',)
-				.attr({x: screenWidth / 2, y: 500,
+				.attr({x: (screenWidth / 2) - 100,
+					   y: screenHeight - (canvasEdge * 2),
 					   w: 200, h: 40})
 				.color('#FFFFFF')
 				.text('Start!')
