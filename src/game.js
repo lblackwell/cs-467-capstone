@@ -105,29 +105,35 @@ Game =
 	      				if (this.x > currentCenterX + (tileWidth / 2))
 	      				{
 	      					currentCenterX = currentCenterX + tileWidth;
-	      					Crafty.viewport.pan((tileWidth / 2) + canvasEdge, 0, panTime);
+	      					Crafty.viewport.pan((tileWidth / 2) + canvasEdge, 0,
+	      										panTime);
 	      				}
 	      				else if (this.x < currentCenterX - (tileWidth / 2))
 	      				{
 	      					currentCenterX = currentCenterX - tileWidth;
-      						Crafty.viewport.pan((tileWidth / 2) + canvasEdge, 0, panTime);
+      						Crafty.viewport.pan((tileWidth / 2) + canvasEdge, 0,
+      											panTime);
 	      				}
 
 	      				if (this.y > currentCenterY + (tileHeight / 2))
 	      				{
 	      					currentCenterY = currentCenterY + tileHeight;
-	      					Crafty.viewport.pan(0, (tileHeight / 2) + canvasEdge, panTime);
+	      					Crafty.viewport.pan(0, (tileHeight / 2) + canvasEdge,
+	      										panTime);
 	      				}
 	      				else if (this.y < currentCenterY - (tileHeight / 2))
 	      				{
 	      					currentCenterY = currentCenterY - tileHeight;
-	      					Crafty.viewport.pan(0, (tileHeight / 2) + canvasEdge, panTime);
+	      					Crafty.viewport.pan(0, (tileHeight / 2) + canvasEdge,
+	      										panTime);
 	      				}
 
 	      				// Debug
-	      				console.log('Center: ' + currentCenterX + ' ' + currentCenterY);
+	      				console.log('Center: ' + currentCenterX + ' ' +
+	      							currentCenterY);
 	      				console.log('Player: ' + this.x + ' ' + this.y);
-	      				console.log('Viewport: ' + Crafty.viewport.x + ' ' + Crafty.viewport.y);
+	      				console.log('Viewport: ' + Crafty.viewport.x + ' ' +
+	      							Crafty.viewport.y);
 	      			})
 				.bind('ViewportScroll', function()
 				{
@@ -154,9 +160,13 @@ Game =
 	      				}
 
 	      				// Debug
-	      				console.log('Center: ' + currentCenterX + ' ' + currentCenterY);
+	      				console.log('Center: ' + currentCenterX + ' ' +
+	      							currentCenterY);
 	      				console.log('Player: ' + this.x + ' ' + this.y);
-	      				console.log('Viewport: ' + Crafty.viewport.x + ' ' + Crafty.viewport.y);
+	      				console.log('Viewport: ' + Crafty.viewport.x + ' ' +
+	      							Crafty.viewport.y);
+
+	      				// TODO: Probably a good place to load entities in tile and neighbors
 				});
 
 	      	// Platforms
@@ -200,7 +210,9 @@ Game =
 
       	// Start camera on starting center point
       	Crafty.viewport.clampToEntities = false;
-		Crafty.viewport.scroll('x', currentCenterX - (tileWidth / 2)+ canvasEdge);
-		Crafty.viewport.scroll('y', currentCenterY - (tileHeight / 2) + canvasEdge);
+		Crafty.viewport.scroll('x',
+							   currentCenterX - (tileWidth / 2) + canvasEdge);
+		Crafty.viewport.scroll('y',
+							   currentCenterY - (tileHeight / 2) + canvasEdge);
 	}
 }
