@@ -43,7 +43,18 @@ Game =
 		Crafty.defineScene('SetupScreen', function()
 		{
 			// Select avatar
-			// TODO
+			// Left arrow
+			Crafty.e('2D, DOM, Color, Mouse')
+				.attr({x: screenWidth / 6, y: screenHeight / 3, w: 40, h: 40})
+				.color('red');
+
+			// Right arrow
+			Crafty.e('2D, DOM, Color, Mouse')
+				.attr({x: (screenWidth / 6) * 5 - 40, y: screenHeight / 3,
+					   w: 40, h: 40})
+				.color('red');
+
+			// Selected avatar
 
 			// Ready/enter world button
 			Crafty.e('2D, DOM, Color, Mouse, Text',)
