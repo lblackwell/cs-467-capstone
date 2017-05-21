@@ -181,3 +181,18 @@ Game =
       	Crafty.enterScene('HomeScreen');
 	}
 }
+
+function loadFromJson(jsonString)
+{
+	var result = JSON.parse(jsonString)
+
+	// Loop through JSON for each platform
+	for(var i = 0; i < result.platforms.length; i++)
+	{
+		// Create a platform
+		Crafty.e('Platform, 2D, DOM, Image')
+			.attr({x: result.platforms[i].x, y: result.platforms[i].y,
+				   w: result.platforms[i].width, h: result.platforms[i].height})
+			.image(result.platforms[i].image);
+	}
+}
