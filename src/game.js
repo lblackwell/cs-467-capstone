@@ -119,26 +119,55 @@ Game =
 	      			}})
 
 	       		// TODO: Use viewport scroll event to load new assets
+	       		// I'm pretty sure my math is wrong anyway ¯\_(ツ)_/¯
 	       		// When viewport x or y coords change, assets will be loaded
 	       		.bind('ViewportScroll', function()
 	       		{
 	       			// Load current tile
+	       			// TODO remove hard-coded art and coordinates
+	       			Crafty.e('Background, 2D, DOM, Color')
+	       				.attr({x: 0, y: 0, w: tileWidth, h: tileHeight})
+	       				.color('white');
 
 	       			// Load top-left tile
+	       			Crafty.e('Background, 2D, DOM, Image')
+	       				.attr({x: -600, y: -350, w: tileWidth, h: tileHeight})
+	       				.image('../Art/tile0.svg');
 
 	       			// Load top-center tile
+	       			Crafty.e('Background, 2D, DOM, Image')
+	       				.attr({x: 0, y: -350, w: tileWidth, h: tileHeight})
+	       				.image('../Art/tile1.svg');
 
 	       			// Load top-right tile
+	       			Crafty.e('Background, 2D, DOM, Image')
+	       				.attr({x: 600, y: -350, w: tileWidth, h: tileHeight})
+	       				.image('../Art/tile2.svg');
 
 	       			// Load middle-left tile
+	       			Crafty.e('Background, 2D, DOM, Image')
+	       				.attr({x: -600, y: 0, w: tileWidth, h: tileHeight})
+	       				.image('../Art/tile3.svg');
 
 	       			// Load middle-right tile
+	       			Crafty.e('Background, 2D, DOM, Image')
+	       				.attr({x: 600, y: 0, w: tileWidth, h: tileHeight})
+	       				.image('../Art/tile5.svg');
 
 	       			// Load bottom-left tile
+	       			Crafty.e('Background, 2D, DOM, Image')
+	       				.attr({x: -600, y: 350, w: tileWidth, h: tileHeight})
+	       				.image('../Art/tile6.svg');
 
 	       			// Load bottom-center tile
+	       			Crafty.e('Background, 2D, DOM, Image')
+	       				.attr({x: 0, y: 350, w: tileWidth, h: tileHeight})
+	       				.image('../Art/tile7.svg');
 
 	       			// Load bottom-right tile
+	       			Crafty.e('Background, 2D, DOM, Image')
+	       				.attr({x: 600, y: 350, w: tileWidth, h: tileHeight})
+	       				.image('../Art/tile8.svg');
 
 	       			// TODO: Use for-loop for the above?
 	       			// TODO: Need equation to match coordinates to tiles
@@ -147,13 +176,16 @@ Game =
 	       				// Find coordinates (use helper fn?)
 	       				// Query DB for assets in tile
 	       				// Create CraftyJS objects from platforms (current/center tile only)
-	       		})
-	      		;
+	       		});
 
 	      	// Floor
 	      	Crafty.e('Platform, 2D, Canvas, Color')
 	      		.attr({x: -4000, y: 590, w: 8000, h: 10})
 	      		.color('green');
+
+	      	// Put player in front
+	      	player.z = 1;
+
 
 	       	// Have camera follow player sprite
 	       	// FIXME: This will be replaced with scroll-by-tile
@@ -165,7 +197,7 @@ Game =
 	}
 }
 
-function loadFromJson(jsonString)
+function loadPlatformsFromJson(jsonString)
 {
 	// Create object from JSON string
 	var result = JSON.parse(jsonString)
