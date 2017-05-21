@@ -116,7 +116,39 @@ Game =
 	      			if(e.key == Crafty.keys.DOWN_ARROW)
 	      			{
 	      				this.gravity('Platform');
-	      			}});
+	      			}})
+
+	       		// TODO: Use viewport scroll event to load new assets
+	       		// When viewport x or y coords change, assets will be loaded
+	       		.bind('ViewportScroll', function()
+	       		{
+	       			// Load current tile
+
+	       			// Load top-left tile
+
+	       			// Load top-center tile
+
+	       			// Load top-right tile
+
+	       			// Load middle-left tile
+
+	       			// Load middle-right tile
+
+	       			// Load bottom-left tile
+
+	       			// Load bottom-center tile
+
+	       			// Load bottom-right tile
+
+	       			// TODO: Use for-loop for the above?
+	       			// TODO: Need equation to match coordinates to tiles
+
+	       			// For i in 0-8:
+	       				// Find coordinates (use helper fn?)
+	       				// Query DB for assets in tile
+	       				// Create CraftyJS objects from platforms (current/center tile only)
+	       		})
+	      		;
 
 	      	// Platforms
 	      	Crafty.e('Platform, 2D, Canvas, Color')
@@ -141,8 +173,8 @@ Game =
 	      		.color('green');
 
 	       	// Have camera follow player sprite
+	       	// FIXME: This will be replaced with scroll-by-tile
 	       	Crafty.viewport.follow(player, 0, 50);
-
       	});
 
 		// Start game on home screen
