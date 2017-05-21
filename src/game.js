@@ -150,23 +150,6 @@ Game =
 	       		})
 	      		;
 
-	      	// Platforms
-	      	Crafty.e('Platform, 2D, Canvas, Color')
-	      		.attr({x: 0, y: 250, w: 250, h: 10})
-	      		.color('green');
-
-	      	Crafty.e('Platform, 2D, Canvas, Color')
-	      		.attr({x: 400, y: 300, w: 250, h: 10})
-	      		.color('green');
-
-	      	Crafty.e('Platform, 2D, Canvas, Color')
-	      		.attr({x: 130, y: 450, w: 100, h: 10})
-	      		.color('green');
-
-	      	Crafty.e('Platform, 2D, Canvas, Color')
-	      		.attr({x: 170, y: 540, w: 100, h: 10})
-	      		.color('green');
-
 	      	// Floor
 	      	Crafty.e('Platform, 2D, Canvas, Color')
 	      		.attr({x: -4000, y: 590, w: 8000, h: 10})
@@ -184,9 +167,10 @@ Game =
 
 function loadFromJson(jsonString)
 {
+	// Create object from JSON string
 	var result = JSON.parse(jsonString)
 
-	// Loop through JSON for each platform
+	// Loop through object to get each platform
 	for(var i = 0; i < result.platforms.length; i++)
 	{
 		// Create a platform
